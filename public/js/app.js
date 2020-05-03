@@ -2141,6 +2141,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.form.media = [];
       this.media.images = [];
       this.media.video = null;
+      this.media.progress = 0;
     }
   },
   mounted: function mounted() {
