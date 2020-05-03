@@ -153,6 +153,7 @@
                 this.form.media = []
                 this.media.images = []
                 this.media.video = null
+                this.media.progress = 0
             }
         },
         mounted() {
