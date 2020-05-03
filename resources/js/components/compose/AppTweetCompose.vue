@@ -8,6 +8,7 @@
             />
 
             <app-tweet-media-progress-indicator
+                v-if="media.progress"
                 class="mb-4"
                 :progress="media.progress"
             />
@@ -76,8 +77,10 @@
         },
         methods: {
             async submit() {
-                let media = await this.uploadMedia()
-                this.form.media = media.data.data.map(r => r.id)
+                if (this.media.images.length || this.media.video) {
+                    let media = await this.uploadMedia()
+                    this.form.media = media.data.data.map(r => r.id)
+                }
 
                 await axios.post('/api/tweets', this.form)
 

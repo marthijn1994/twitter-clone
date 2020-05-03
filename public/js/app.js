@@ -1985,6 +1985,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "AppTweetCompose",
@@ -2012,21 +2013,28 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                _context.next = 2;
+                if (!(_this.media.images.length || _this.media.video)) {
+                  _context.next = 5;
+                  break;
+                }
+
+                _context.next = 3;
                 return _this.uploadMedia();
 
-              case 2:
+              case 3:
                 media = _context.sent;
                 _this.form.media = media.data.data.map(function (r) {
                   return r.id;
                 });
-                _context.next = 6;
+
+              case 5:
+                _context.next = 7;
                 return axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('/api/tweets', _this.form);
 
-              case 6:
+              case 7:
                 _this.resetForm();
 
-              case 7:
+              case 8:
               case "end":
                 return _context.stop();
             }
@@ -44258,10 +44266,12 @@ var render = function() {
             }
           }),
           _vm._v(" "),
-          _c("app-tweet-media-progress-indicator", {
-            staticClass: "mb-4",
-            attrs: { progress: _vm.media.progress }
-          }),
+          _vm.media.progress
+            ? _c("app-tweet-media-progress-indicator", {
+                staticClass: "mb-4",
+                attrs: { progress: _vm.media.progress }
+              })
+            : _vm._e(),
           _vm._v(" "),
           _vm.media.images.length
             ? _c("app-tweet-image-preview", {
