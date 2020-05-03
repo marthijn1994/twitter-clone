@@ -14,6 +14,8 @@ Route::group(['namespace' => 'Api'], function() {
     Route::post('/tweets/{tweet}/retweets', 'Tweets\TweetRetweetController@store');
     Route::delete('/tweets/{tweet}/retweets', 'Tweets\TweetRetweetController@destroy');
 
+    Route::post('/tweets/{tweet}/quotes', 'Tweets\TweetQuoteController@store');
+
     Route::post('/media', 'Media\MediaController@store');
     Route::get('/media/types', 'Media\MediaTypesController@index');
 });

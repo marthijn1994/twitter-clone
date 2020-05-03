@@ -19,6 +19,7 @@
         window.User = {
             id: {{ optional(auth()->user())->id }},
             avatar: '{{ optional(auth()->user())->avatar() }}',
+            name: '{{ optional(auth()->user())->name }}'
         }
     </script>
 </head>
@@ -26,6 +27,8 @@
     <div id="app">
         <main class="container mx-auto">
             @yield('content')
+
+            <modals-container></modals-container>
         </main>
     </div>
 </body>

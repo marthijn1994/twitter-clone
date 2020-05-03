@@ -5,35 +5,11 @@
 
             <app-tweet-compose-textarea
                 v-model="form.body"
-            />
-
-            <app-tweet-media-progress-indicator
-                v-if="media.progress"
-                class="mb-4"
-                :progress="media.progress"
-            />
-
-            <app-tweet-image-preview
-                v-if="media.images.length"
-                :images="media.images"
-                @removed="removeImage"
-            />
-
-            <app-tweet-video-preview
-                v-if="media.video"
-                :video="media.video"
-                @removed="removeVideo"
+                placeholder="Add a comment"
             />
 
             <div class="flex justify-between items-center">
-                <ul class="flex items-center">
-                    <li class="mr-4">
-                        <app-tweet-compose-media-button
-                            id="media-compose"
-                            @selected="onMediaSelected"
-                        />
-                    </li>
-                </ul>
+                <div></div>
                 <div class="flex items-center justify-end">
                     <div>
                         <app-tweet-compose-limit
@@ -54,17 +30,31 @@
 </template>
 
 <script>
+    import { mapActions } from 'vuex'
     import compose from '../../mixins/compose'
-    import axios from "axios";
 
     export default {
-        name: "AppTweetCompose",
+        name: "AppTweetRetweetCompose",
         mixins: [
             compose
         ],
+        props: {
+            tweet: {
+                required: true,
+                type: Object
+            }
+        },
         methods: {
+            ...mapActions({
+                quoteTweet: 'timeline/quoteTweet'
+            }),
+
             async post() {
-                await axios.post('/api/tweets', this.form)
+                await this.quoteTweet({
+                    tweet: this.tweet,
+                    data: this.form
+                })
+                this.$emit('success')
             }
         }
     }
