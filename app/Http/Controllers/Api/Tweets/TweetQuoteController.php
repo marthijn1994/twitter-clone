@@ -13,6 +13,14 @@ class TweetQuoteController extends Controller
 {
 
     /**
+     * TweetQuoteController constructor.
+     */
+    public function __construct()
+    {
+        $this->middleware(['auth:sanctum']);
+    }
+
+    /**
      * @param Tweet $tweet
      * @param Request $request
      */

@@ -55,6 +55,7 @@
 </template>
 
 <script>
+    import {  mapActions } from "vuex";
     import compose from '../../mixins/compose'
 
     export default {
@@ -69,8 +70,16 @@
             }
         },
         methods: {
+            ...mapActions({
+                replyToTweet: 'timeline/replyToTweet'
+            }),
+
             async post() {
-                console.log('reply')
+                await this.replyToTweet({
+                    tweet: this.tweet,
+                    data: this.form
+                })
+                this.$emit('success')
             }
         }
     }

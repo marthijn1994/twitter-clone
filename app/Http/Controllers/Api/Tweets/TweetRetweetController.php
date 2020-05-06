@@ -14,10 +14,18 @@ class TweetRetweetController extends Controller
 {
 
     /**
+     * TweetRetweetController constructor.
+     */
+    public function __construct()
+    {
+        $this->middleware(['auth:sanctum']);
+    }
+
+    /**
      * @param Tweet $tweet
      * @param Request $request
      */
-    public function store(Tweet $tweet, Request $request)
+    public function store(Request $request, Tweet $tweet)
     {
         $retweet = $request->user()->tweets()->create([
             'type' => TweetType::RETWEET,

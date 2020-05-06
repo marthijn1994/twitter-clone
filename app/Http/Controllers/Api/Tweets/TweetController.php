@@ -11,11 +11,17 @@ use App\Tweets\TweetType;
 class TweetController extends Controller
 {
 
+    /**
+     * TweetController constructor.
+     */
     public function __construct()
     {
         $this->middleware(['auth:sanctum'])->only(['store']);
     }
 
+    /**
+     * @param TweetStoreRequest $request
+     */
     public function store(TweetStoreRequest $request)
     {
         $tweet = $request->user()->tweets()->create(

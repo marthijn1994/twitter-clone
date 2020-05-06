@@ -2,6 +2,7 @@
     <div>
         <app-tweet-retweet-compose
             :tweet="tweet"
+            @success="$emit('close')"
         />
 
         <component

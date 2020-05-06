@@ -74,6 +74,10 @@ export default {
 
         async quoteTweet(_, { tweet, data }) {
             await axios.post(`/api/tweets/${ tweet.id }/quotes`, data)
+        },
+
+        async replyToTweet(_, { tweet, data }) {
+            await axios.post(`/api/tweets/${ tweet.id }/replies`, data)
         }
     }
 }
