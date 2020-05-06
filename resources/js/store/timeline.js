@@ -65,9 +65,6 @@ export default {
         async getTweets({ commit }, url) {
             let response = await axios.get(url)
 
-            console.log(response.data.meta.likes)
-            console.log(response.data.meta.retweets)
-
             commit('PUSH_TWEETS', response.data.data)
             commit('likes/PUSH_LIKES', response.data.meta.likes, { root: true })
             commit('retweets/PUSH_RETWEETS', response.data.meta.retweets, { root: true })
@@ -76,7 +73,7 @@ export default {
         },
 
         async quoteTweet(_, { tweet, data }) {
-            await axios.post(`/api/tweets/${tweet.id}/quotes`, data)
+            await axios.post(`/api/tweets/${ tweet.id }/quotes`, data)
         }
     }
 }

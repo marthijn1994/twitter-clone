@@ -32,7 +32,7 @@
 
 <script>
     import { mapGetters, mapActions } from "vuex";
-    import AppTweetRetweetModal from '../../modals/appTweetRetweetModal'
+    import AppTweetRetweetModal from '../../modals/AppTweetRetweetModal'
 
     export default {
         name: "AppTweetRetweetAction",
