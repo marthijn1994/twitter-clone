@@ -38,6 +38,9 @@ export default {
                 if (get(t.original_tweet, 'id') === id)
                     t.original_tweet.likes_count = count
 
+                if (get(t, 'original_tweet.original_tweet.id') === id)
+                    t.original_tweet.original_tweet.likes_count = count
+
                 return t
             })
         },
@@ -50,6 +53,9 @@ export default {
                 if (get(t.original_tweet, 'id') === id)
                     t.original_tweet.retweets_count = count
 
+                if (get(t, 'original_tweet.original_tweet.id') === id)
+                    t.original_tweet.original_tweet.retweets_count = count
+
                 return t
             })
         }
@@ -58,6 +64,9 @@ export default {
     actions: {
         async getTweets({ commit }, url) {
             let response = await axios.get(url)
+
+            console.log(response.data.meta.likes)
+            console.log(response.data.meta.retweets)
 
             commit('PUSH_TWEETS', response.data.data)
             commit('likes/PUSH_LIKES', response.data.meta.likes, { root: true })

@@ -24,7 +24,6 @@
 </template>
 
 <script>
-    import { mapGetters } from "vuex";
 
     export default {
         name: "AppTweetRetweetActionButton",
@@ -32,17 +31,13 @@
             tweet: {
                 required: true,
                 type: Object
+            },
+            retweeted: {
+                required: true,
+                type: Boolean
             }
         },
-        computed: {
-            ...mapGetters({
-                retweets: 'retweets/retweets'
-            }),
-
-            retweeted() {
-                return this.retweets.includes(this.tweet.id)
-            }
-        }
+        methods: {}
     }
 </script>
 

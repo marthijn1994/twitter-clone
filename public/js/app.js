@@ -2612,7 +2612,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         return;
       }
 
-      if (this.lastPage == this.page) {
+      if (this.lastPage === this.page) {
         return;
       }
 
@@ -2872,6 +2872,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2920,13 +2922,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 //
 //
 //
@@ -2952,22 +2947,19 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "AppTweetRetweetActionButton",
   props: {
     tweet: {
       required: true,
       type: Object
+    },
+    retweeted: {
+      required: true,
+      type: Boolean
     }
   },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])({
-    retweets: 'retweets/retweets'
-  }), {
-    retweeted: function retweeted() {
-      return this.retweets.includes(this.tweet.id);
-    }
-  })
+  methods: {}
 });
 
 /***/ }),
@@ -45531,7 +45523,7 @@ var render = function() {
                 { slot: "trigger" },
                 [
                   _c("app-tweet-retweet-action-button", {
-                    attrs: { tweet: _vm.tweet }
+                    attrs: { tweet: _vm.tweet, retweeted: _vm.retweeted }
                   })
                 ],
                 1
@@ -45568,7 +45560,7 @@ var render = function() {
             2
           )
         : _c("app-tweet-retweet-action-button", {
-            attrs: { tweet: _vm.tweet },
+            attrs: { tweet: _vm.tweet, retweeted: _vm.retweeted },
             on: {
               click: function($event) {
                 $event.preventDefault()
@@ -61581,6 +61573,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       state.tweets = state.tweets.map(function (t) {
         if (t.id === id) t.likes_count = count;
         if (Object(lodash__WEBPACK_IMPORTED_MODULE_2__["get"])(t.original_tweet, 'id') === id) t.original_tweet.likes_count = count;
+        if (Object(lodash__WEBPACK_IMPORTED_MODULE_2__["get"])(t, 'original_tweet.original_tweet.id') === id) t.original_tweet.original_tweet.likes_count = count;
         return t;
       });
     },
@@ -61590,6 +61583,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       state.tweets = state.tweets.map(function (t) {
         if (t.id === id) t.retweets_count = count;
         if (Object(lodash__WEBPACK_IMPORTED_MODULE_2__["get"])(t.original_tweet, 'id') === id) t.original_tweet.retweets_count = count;
+        if (Object(lodash__WEBPACK_IMPORTED_MODULE_2__["get"])(t, 'original_tweet.original_tweet.id') === id) t.original_tweet.original_tweet.retweets_count = count;
         return t;
       });
     }
@@ -61608,6 +61602,8 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 
               case 3:
                 response = _context.sent;
+                console.log(response.data.meta.likes);
+                console.log(response.data.meta.retweets);
                 commit('PUSH_TWEETS', response.data.data);
                 commit('likes/PUSH_LIKES', response.data.meta.likes, {
                   root: true
@@ -61617,7 +61613,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
                 });
                 return _context.abrupt("return", response);
 
-              case 8:
+              case 10:
               case "end":
                 return _context.stop();
             }

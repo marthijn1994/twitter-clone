@@ -63,7 +63,7 @@
                     return
                 }
 
-                if (this.lastPage == this.page) {
+                if (this.lastPage === this.page) {
                     return
                 }
 

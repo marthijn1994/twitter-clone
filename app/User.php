@@ -106,8 +106,7 @@ class User extends Authenticatable
     public function retweets()
     {
         return $this->hasMany(Tweet::class)
-            ->where('type', TweetType::RETWEET)
-            ->orWhere('type', TweetType::QUOTE);
+            ->whereIn('type', [TweetType::QUOTE, TweetType::RETWEET]);
     }
 
 }

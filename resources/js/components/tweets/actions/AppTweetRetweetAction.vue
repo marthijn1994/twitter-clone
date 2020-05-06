@@ -5,6 +5,7 @@
             <template slot="trigger">
                 <app-tweet-retweet-action-button
                     :tweet="tweet"
+                    :retweeted="retweeted"
                 />
             </template>
 
@@ -23,6 +24,7 @@
         <app-tweet-retweet-action-button
             v-else
             :tweet="tweet"
+            :retweeted="retweeted"
             @click.prevent="retweetOrUnretweet"
         />
     </div>
