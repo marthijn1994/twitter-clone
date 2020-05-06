@@ -18,15 +18,18 @@ class TimelineController extends Controller
     {
         $tweets = $request->user()
             ->tweetsFromFollowing()
+            ->parent()
             ->latest()
             ->with([
                 'user',
                 'likes',
                 'retweets',
+                'replies',
                 'media.baseMedia',
                 'originalTweet.user',
                 'originalTweet.likes',
                 'originalTweet.retweets',
+                'originalTweet.replies',
                 'originalTweet.media.baseMedia',
             ])
             ->paginate(8);
