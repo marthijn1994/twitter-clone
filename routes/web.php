@@ -21,4 +21,5 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/timeline', 'Api\Timeline\TimelineController@index');
+Route::get('/notifications', 'Notifications\NotificationController@index')->name('notifications');
+
