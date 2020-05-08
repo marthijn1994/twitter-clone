@@ -71,6 +71,9 @@ Echo.channel('tweets')
         }
         store.commit('timeline/SET_LIKES', e)
     })
+    .listen('.TweetRepliesWereUpdated', (e) => {
+        store.commit('timeline/SET_REPLIES', e)
+    })
     .listen('.TweetRetweetsWereUpdated', (e) => {
         if (e.user_id === User.id) {
             store.dispatch('retweets/syncRetweets', e.id)

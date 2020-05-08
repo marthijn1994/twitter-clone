@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers\Api\Tweets;
 
-use App\Events\Tweets\TweetWasCreated;
+use App\Events\Tweets\TweetRepliesWereUpdated;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Tweets\TweetStoreRequest;
 use App\Tweet;
 use App\TweetMedia;
 use App\Tweets\TweetType;
@@ -37,6 +36,8 @@ class TweetReplyController extends Controller
         foreach ($request->media as $id) {
             $reply->media()->save(TweetMedia::find($id));
         }
+
+        broadcast(new TweetRepliesWereUpdated($tweet));
     }
 
 }
