@@ -78,4 +78,12 @@ class Tweet extends Model
         return $this->hasMany(__CLASS__, 'parent_id', 'id');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function entities()
+    {
+        return $this->hasMany(Entity::class);
+    }
+
 }
