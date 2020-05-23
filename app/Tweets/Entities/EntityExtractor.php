@@ -10,12 +10,12 @@ class EntityExtractor
     /**
      *
      */
-    const HASHTAG_REGEX = '/(?!\s)#([a-zA-Z0-9ぁ-んァ-ヶー一-龠０-９]\w*)\b/u';
+    protected const HASHTAG_REGEX = '/(?!\s)#([a-zA-Z0-9ぁ-んァ-ヶー一-龠０-９]\w*)\b/u';
 
     /**
      *
      */
-    const MENTION_REGEX = '/(?=[^\w!]|[ぁ-んァ-ヶー一-龠０-９])@(\w+)\b/u';
+    protected const MENTION_REGEX = '/(?=[^\w!]|[ぁ-んァ-ヶー一-龠０-９])@(\w+)\b/u';
 
     /**
      * @var

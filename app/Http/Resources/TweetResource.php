@@ -23,6 +23,7 @@ class TweetResource extends JsonResource
             'retweets_count' => $this->retweets->count(),
             'replies_count' => $this->replies->count(),
             'media' => new MediaCollection($this->media),
+            'entities' => new EntityCollection($this->entities),
             'user' => new UserResource($this->user),
             'created_at' => $this->created_at->timestamp,
         ];
