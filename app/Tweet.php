@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Tweets\Entities\EntityExtractor;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
@@ -12,6 +13,20 @@ class Tweet extends Model
      * @var array ]
      */
     protected $guarded = [];
+
+    /**
+     *
+     */
+    public static function boot()
+    {
+        parent::boot();
+
+        static::created(function (Tweet $tweet) {
+            $tweet->entities()->createMany(
+                (new EntityExtractor($tweet->body))->getHashtagEntities()
+            );
+        });
+    }
 
     /**
      * @param Builder $builder
