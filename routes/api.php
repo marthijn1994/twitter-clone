@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 Route::group(['namespace' => 'Api'], function() {
     Route::get('/timeline', 'Timeline\TimelineController@index');
 
+    Route::get('/tweets', 'Tweets\TweetController@index');
     Route::post('/tweets', 'Tweets\TweetController@store');
 
     Route::post('/tweets/{tweet}/likes', 'Tweets\TweetLikeController@store');
@@ -20,5 +21,7 @@ Route::group(['namespace' => 'Api'], function() {
 
     Route::post('/media', 'Media\MediaController@store');
     Route::get('/media/types', 'Media\MediaTypesController@index');
+
+    Route::get('/notifications', 'Notifications\NotificationController@index');
 });
 

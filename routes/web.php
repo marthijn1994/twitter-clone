@@ -23,3 +23,4 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/notifications', 'Notifications\NotificationController@index')->name('notifications');
 
+Route::get('/api/notifications', 'Api\Notifications\NotificationController@index');

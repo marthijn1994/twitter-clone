@@ -4,6 +4,7 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
+
 require('./bootstrap');
 
 window.Vue = require('vue');
@@ -44,12 +45,14 @@ files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(
 import timeline from './store/timeline'
 import likes from './store/likes'
 import retweets from './store/retweets'
+import notifications from "./store/notifications";
 
 const store = new Vuex.Store({
     modules: {
         timeline,
         likes,
-        retweets
+        retweets,
+        notifications
     }
 })
 
@@ -70,15 +73,18 @@ Echo.channel('tweets')
             store.dispatch('likes/syncLike', e.id)
         }
         store.commit('timeline/SET_LIKES', e)
-    })
-    .listen('.TweetRepliesWereUpdated', (e) => {
-        store.commit('timeline/SET_REPLIES', e)
+        store.commit('notifications/SET_LIKES', e)
     })
     .listen('.TweetRetweetsWereUpdated', (e) => {
         if (e.user_id === User.id) {
             store.dispatch('retweets/syncRetweets', e.id)
         }
         store.commit('timeline/SET_RETWEETS', e)
+        store.commit('notifications/SET_RETWEETS', e)
+    })
+    .listen('.TweetRepliesWereUpdated', (e) => {
+        store.commit('timeline/SET_REPLIES', e)
+        store.commit('notifications/SET_REPLIES', e)
     })
     .listen('.TweetWasDeleted', (e) => {
         store.commit('timeline/POP_TWEET', e.id)
