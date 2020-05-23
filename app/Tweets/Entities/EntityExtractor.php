@@ -13,6 +13,11 @@ class EntityExtractor
     const HASHTAG_REGEX = '/(?!\s)#([a-zA-Z0-9ぁ-んァ-ヶー一-龠０-９]\w*)\b/u';
 
     /**
+     *
+     */
+    const MENTION_REGEX = '/(?=[^\w!]|[ぁ-んァ-ヶー一-龠０-９])@(\w+)\b/u';
+
+    /**
      * @var
      */
     protected $string;
@@ -38,6 +43,28 @@ class EntityExtractor
     }
 
     /**
+     * @return array|array[]
+     */
+    public function getMentionEntities(): array
+    {
+        return $this->buildEntityArray(
+            $this->match(self::MENTION_REGEX),
+            EntityType::MENTION
+        );
+    }
+
+    /**
+     * @return array
+     */
+    public function getAllEntities(): array
+    {
+        return array_merge(
+            $this->getHashtagEntities(),
+            $this->getMentionEntities()
+        );
+    }
+
+    /**
      * @param $entities
      * @param $type
      * @return array[]
@@ -59,7 +86,7 @@ class EntityExtractor
      * @param $pattern
      * @return mixed
      */
-    protected function match($pattern)
+    protected function match($pattern): array
     {
         preg_match_all(
             $pattern,

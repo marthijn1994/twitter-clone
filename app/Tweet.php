@@ -15,7 +15,7 @@ class Tweet extends Model
     protected $guarded = [];
 
     /**
-     *
+     * @inheritDoc
      */
     public static function boot()
     {
@@ -23,7 +23,7 @@ class Tweet extends Model
 
         static::created(function (Tweet $tweet) {
             $tweet->entities()->createMany(
-                (new EntityExtractor($tweet->body))->getHashtagEntities()
+                (new EntityExtractor($tweet->body))->getAllEntities()
             );
         });
     }
